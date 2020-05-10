@@ -1,0 +1,63 @@
+* {
+	margin: 0;
+	padding: 0;
+	background-color:#737070;
+}
+
+body{
+	background-color:#737070;
+}
+
+
+.dop-menu .dropdown-item:active {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+}
+
+.table-section {
+	display: none;
+	padding: 15px;
+}
+.table-section.active {
+	display: block;
+}
+
+tbody {
+	color: #fff;
+}
+tbody tr:hover {
+	transition: background 0.25s ease-out 0s;
+}
+tbody tr:hover {
+	background-color: rgba(74, 202, 168, 0.7);;
+	color: #fff;
+}
+
+.modal-body span {
+	font-weight: bold;
+}
+.modal-body input {
+	display: block;
+	margin-bottom: 10px;
+}
+
+
+.modal-body2 span {
+	font-weight: bold;
+}
+.modal-body2 input {
+	display: block;
+	margin-bottom: 10px;
+}
+
+modal-title{
+	background-color:#rgba(108, 69, 100, 0.66);
+}
+
+#tableback{
+	background-color:#373737;
+}
+
+#navbarSupportedContent{
+	background-color: #102027;
+}

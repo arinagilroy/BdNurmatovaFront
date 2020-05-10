@@ -1,0 +1,43 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+
+.dop-menu .dropdown-item:active {
+	background-color: #ee6e73;
+	color: #fff;
+}
+
+.table-section {
+	display: none;
+	padding: 15px;
+}
+.table-section.active {
+	display: block;
+}
+
+tbody tr:hover {
+	transition: background 0.25s ease-out 0s;
+}
+tbody tr:hover {
+	background-color: rgba(238, 110, 115, 1);
+	color: #fff;
+}
+
+.modal-body span {
+	font-weight: bold;
+}
+.modal-body input {
+	display: block;
+	margin-bottom: 10px;
+}
+
+
+.modal-body2 span {
+	font-weight: bold;
+}
+.modal-body2 input {
+	display: block;
+	margin-bottom: 10px;
+}

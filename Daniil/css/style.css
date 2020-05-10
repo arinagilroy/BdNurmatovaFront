@@ -1,0 +1,76 @@
+html {
+	background-color:#a18175;
+}
+
+#tableback {
+	background-color:#a18175;
+}
+
+body{
+	background-color:rgba(#9d7e74, 0.82);
+}
+
+
+.dop-menu .dropdown-item:active {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+}
+
+.table-section {
+	display: none;
+	padding: 15px;
+}
+.table-section.active {
+	display: block;
+}
+
+tbody tr:hover {
+	transition: background 0.25s ease-out 0s;
+}
+tbody tr:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+	color: #fff;
+}
+
+.modal-body span {
+	font-weight: bold;
+}
+.modal-body input {
+	display: block;
+	margin-bottom: 10px;
+}
+
+#tableback{
+	background-color:rgba(#9d7e74, 0.82);
+}
+
+.modal-body2 span {
+	font-weight: bold;
+	margin-left: 15px;
+}
+.modal-body2 input {
+	display: block;
+	margin-bottom: 10px;
+	margin-left: 15px;
+}
+
+.show-all-button:hover {
+	outline: 0;
+}
+.show-all-button:hover {
+	background-color: #000;
+	color: #fff;
+}
+
+#navbarSupportedContent{
+	background-color: #2a1409;
+}
+
+#searchBackColor{
+	margin: 20px 15px;
+	background-color :rgba(163, 149, 149, 0.64)"
+}
+
+modal-title{
+	background-color:#rgba(108, 69, 100, 0.66);
+}
