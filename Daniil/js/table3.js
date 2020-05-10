@@ -1,4 +1,4 @@
-const base_url = 'http://127.0.0.1:8082/workshop';
+const base_url = 'http://176.57.78.17:8888/workshop';
 var dataOfProducts;
 var nowUpdatingProduct;
 
