@@ -1,4 +1,4 @@
-const base_url = 'http://127.0.0.1:8082/networkComponent';
+const base_url = 'http://176.57.78.17:8888/networkComponent';
 var dataOfProducts;
 var nowUpdatingProduct;
 
@@ -12,7 +12,7 @@ function newTbodyTr(obj, index) {
 				<button type="button" class="btn btn-danger" data-toggle="kss" onclick="deleteThisProduct(${ obj.id })">Delete</button>
 			</td>
 		</tr>`;
-	
+
 	return elem;
 }
 
@@ -28,7 +28,7 @@ class PostApi {
 			method: 'DELETE'
 		}).then(res => res.json());
 	}
-	
+
 	static updateThisProduct(body) {
 		return fetch(base_url+`/manufactCompany`, {
 			method: 'PUT',
@@ -36,7 +36,7 @@ class PostApi {
 			body: body
 		}).then(res => res.json());
 	}
-	
+
 	static createNew(body) {
 		console.log(body);
 		return fetch(base_url+`/manufactCompany`, {
@@ -49,11 +49,11 @@ class PostApi {
 
 document.addEventListener('DOMContentLoaded', function() {
 	var tablesCategory = document.querySelectorAll('.dropdown-item');
-	
+
 	tablesCategory.forEach((item, index) => {
 		item.addEventListener('click', tableSelection);
 	})
-	
+
 	//Создание карточек для таблицы товаров
 	PostApi.getProducts()
 		.then(data => {
@@ -63,23 +63,23 @@ document.addEventListener('DOMContentLoaded', function() {
 		.catch(err => {
 			console.log('Error', err);
 		});
-	
-	
+
+
 });
 
 function resetShow(data) {
 	dataOfProducts = data;
 	let showTable = document.querySelector('.active');
 			showTable = showTable.querySelector('tbody');
-	
+
 			showTable.innerHTML = '';
-		
+
 			data.forEach((item, index) => {
 				let newElem = newTbodyTr(item, index);
-			
+
 				showTable.innerHTML += newElem;
 			});
-	
+
 	setTimeout(function() {
 		document.querySelector('.spinner-border').remove();
 		document.querySelector('.active').style.display = 'block';
@@ -90,12 +90,12 @@ function tableSelection() {
 	var elem = this;
 	var dataId = +elem.getAttribute('data-table');
 	console.log(dataId--);
-	
+
 	var tableSection = document.querySelectorAll('.table-section');
 	tableSection.forEach(item => {
 		item.classList.remove('active');
 	})
-	
+
 	tableSection[dataId].classList.add('active');
 	console.log(tableSection[dataId]);
 }
@@ -106,16 +106,16 @@ function showTr(event, domNum, id) {
 	var modalSpan = document.querySelectorAll('.modal-body > span');
 	var modalInput = document.querySelectorAll('.modal-body > input');
 	var modalTitleID = document.querySelector('.modal-title > span');
-	
+
 	var allTr = event.target.closest('tr');
 	domNum = domNum--;
-	
+
 	modalTitleID.textContent = id;
-	
+
 	if(event.target.tagName.toLowerCase() != 'button') {
 		let realObj = dataOfProducts[domNum];
 		nowUpdatingProduct = realObj;
-		
+
 		Object.entries(realObj).forEach((item, index) => {
 			if(item[0] != 'id') {
 				modalSpan[index].textContent = item[0];
@@ -128,16 +128,16 @@ function showTr(event, domNum, id) {
 function updateThisProduct() {
 	var modalSpan = document.querySelectorAll('.modal-body > span');
 	var modalInput = document.querySelectorAll('.modal-body > input');
-	
+
 	modalInput.forEach((item, index) => {
 		let key = modalSpan[index].textContent;
 		if(key != 's') {
 			nowUpdatingProduct[key] = item.value;
 		}
 	});
-	
+
 	console.log(nowUpdatingProduct);
-	
+
 	PostApi.updateThisProduct(JSON.stringify(nowUpdatingProduct))
 		.then(data => {
 			console.log(data);
@@ -153,19 +153,19 @@ function createNewProduct() {
 		address: "Apple",
 		phone: 30000
 	}
-	
+
 	var modalSpan = document.querySelectorAll('.modal-body2 > span');
 	var modalInput = document.querySelectorAll('.modal-body2 > input');
 
 	modalSpan.forEach((item, index) => {
 		var key = item.textContent;
-		
+
 		newProduct[key] = modalInput[index].value;
 	});
-	
+
 	console.log(newProduct);
-	
-	
+
+
 	PostApi.createNew(JSON.stringify(newProduct))
 		.then(data => {
 			console.log(data);
@@ -178,7 +178,7 @@ function createNewProduct() {
 
 function deleteThisProduct(id) {
 	console.log(id);
-	
+
 	PostApi.deleteProduct(id)
 		.then(data => {
 			console.log(data);
