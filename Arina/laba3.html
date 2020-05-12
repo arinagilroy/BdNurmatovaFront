@@ -3,13 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
 <body>
 
+  <input type="text" placeholder="Введите топологию...">
+  <button onclick="getResult()">получить сводку</button>
+
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">name</th>
+        <th scope="col">deliveryTime</th>
+        <th scope="col">manufacturerCompany</th>
+        <th scope="col">networkArchitecture</th>
+        <th scope="col">price</th>
+        <th scope="col">supplierCompany</th>
+        <th scope="col">topology</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="show-sumprice" style="margin: 60px auto; text-align: center; font-size: 20px; font-weight: bold;">
+
+  </div>
+<script>
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+
+  function getResult() {
+    var topology = document.querySelector('input');
+
+    fetch(`http://176.57.78.17:8888/networkComponent/architecturePriceInfo?topology=${topology.value}`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        document.querySelector('tbody').innerHTML = '';
+        document.querySelector('.show-sumprice').innerHTML = 'Сумма равно: ' + result.sumPrice;
+        result.networkComponents.forEach((item, index) => {
+          showResult(item);
+        });
+      })
+      .catch(error => console.log('error', error));
+  }
 
 
 
+  // fetch("http://176.57.78.17:8888/networkComponent/architecturePriceInfo?topology=Star", requestOptions)
+  //   .then(response => response.json())
+  //   .then(result => {
+  //     console.log(result);
+  //     document.querySelector('tbody').innerHTML = '';
+  //     document.querySelector('.show-sumprice').innerHTML = 'Сумма равно: ' + result.sumPrice;
+  //     result.networkComponents.forEach((item, index) => {
+  //       showResult(item);
+  //     });
+  //   })
+  //   .catch(error => console.log('error', error));
+
+
+
+    function showResult(obj) {
+      var elem = elemBlock(obj);
+      console.log(elem);
+
+      document.querySelector('tbody').innerHTML += elem;
+    }
+
+
+    function elemBlock(obj) {
+      var elem = `
+        <th scope="row">${obj.id}</th>
+        <td>${obj.name}</td>
+        <td>${obj.deliveryTime}</td>
+        <td>`;
+        if(obj.manufacturerCompany) {
+          elem += `
+          <div class="dropright">
+            <button class="btn btn-secondary dropdown-toggle" type="button" style= "background-color:#543a31" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              инфо
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#"><strong>id:</strong> ${ obj.manufacturerCompany.id }</a>
+              <a class="dropdown-item" href="#"><strong>address:</strong> ${ obj.manufacturerCompany.address }</a>
+              <a class="dropdown-item" href="#"><strong>phone:</strong> ${ obj.manufacturerCompany.phone }</a>
+            </div>
+          </div>
+          `;
+        } else {
+          elem += 'null';
+        }
+
+        elem += `
+          </td>
+          <td>${obj.networkArchitecture}</td>
+          <td>${obj.price}</td>
+          <td>`;
+
+        if(obj.supplierCompany) {
+          elem += `
+          <div class="dropright">
+            <button class="btn btn-secondary dropdown-toggle" type="button" style= "background-color:#543a31" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              инфо
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#"><strong>id:</strong> ${ obj.manufacturerCompany.id }</a>
+              <a class="dropdown-item" href="#"><strong>address:</strong> ${ obj.manufacturerCompany.address }</a>
+              <a class="dropdown-item" href="#"><strong>phone:</strong> ${ obj.manufacturerCompany.phone }</a>
+              <a class="dropdown-item" href="#"><strong>deliverPrice:</strong> ${ obj.manufacturerCompany.deliverPrice }</a>
+            </div>
+          </div>
+          `;
+        } else {
+          elem += 'null';
+        }
+
+        elem += `
+          </td>
+          <td>${obj.topology}</td>
+        `;
+
+      return elem;
+    }
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.6/moment-timezone-with-data.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
