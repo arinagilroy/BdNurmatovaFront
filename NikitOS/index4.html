@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Никита Programms</title>
+	<style>
+		input {
+			font-size: 14px;
+		}
+		button {
+			background-color: #373737;
+			margin-left: 20px;
+			color: #fff;
+			border-radius: 6px;
+			padding: 10px;
+			font-size: 19px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #102027;">
+  <a class="navbar-brand" href="#" style="color: #fff; font-weight: bold;">Главная страница</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: #fff;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Выбрать
+        </a>
+        <div class="dropdown-menu dop-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" data-table="1" href="index.html">Таблица горючесмазочных материалов</a>
+					<a class="dropdown-item" data-table="2" href="index2.html">Таблица поставщики</a>
+					<a class="dropdown-item" data-table="3" href="index3.html">Таблица получателей</a>
+					<a class="dropdown-item" data-table="3" href="index4.html">Динамика ГСМ</a>
+<!--
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+-->
+        </div>
+      </li>
+
+    </ul>
+<!--
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+-->
+  </div>
+</nav>
+
+<label style="margin-left:20px; color: #fff">С    <input type="date" style="margin-top:30px"></label>
+<br>
+<br>
+<label style="margin-left:10px; color: #fff">По <input type="date"></label>
+<br>
+<br>
+<button onclick="getResult()">получить сводку</button>
+
+
+<div class="show">
+
+</div>
+<script>
+var requestOptions = {
+	method: 'GET',
+	redirect: 'follow'
+};
+
+function getResult() {
+	var show = document.querySelector('.show');
+
+	var date = document.querySelectorAll('input');
+
+	var z = moment(date[0].value).unix() *1000;
+	var x = moment(date[1].value).unix()*1000;
+
+	fetch(`http://176.57.78.17:8888/oilProducts/monthInfo?start=${z}&end=${x}`, requestOptions)
+		.then(response => response.json())
+		.then(result => {
+			console.log(result);
+			show.innerHTML = 'Пришло: ' + result.arriveVolume;
+			show.innerHTML += '<br> Ушло: ' + result.goneVolume;
+		})
+		.catch(error => console.log('error', error));
+
+
+}
+
+</script>
+
+<script src="js/table2.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+	$(function () {
+  	$('[data-toggle="tooltip"]').tooltip()
+	});
+
+	$('#myModal').on('shown.bs.modal', function () {
+  	$('#myInput').trigger('focus')
+	});
+</script>
+</body>
+</html>
