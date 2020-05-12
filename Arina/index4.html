@@ -83,7 +83,7 @@ function getResult() {
 		.then(result => {
 			console.log(result);
 			document.querySelector('tbody').innerHTML = '';
-			document.querySelector('.show-sumprice').innerHTML = 'Сумма равно: ' + result.sumPrice;
+			document.querySelector('.show-sumprice').innerHTML = 'Сумма равна: ' + result.sumPrice;
 			result.networkComponents.forEach((item, index) => {
 				showResult(item);
 			});
