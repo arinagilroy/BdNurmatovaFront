@@ -44,8 +44,8 @@
 
     var date = document.querySelectorAll('input');
 
-    var z = moment(date[0].value).unix();
-    var x = moment(date[1].value).unix();
+    var z = moment(date[0].value).unix() *1000;
+    var x = moment(date[1].value).unix()*1000;
 
     fetch(`http://176.57.78.17:8888/oilProducts/monthInfo?start=${z}&end=${x}`, requestOptions)
       .then(response => response.json())
