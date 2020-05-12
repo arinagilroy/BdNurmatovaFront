@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    input {
+      font-size: 14px;
+    }
+    button {
+      background-color: blue;
+      color: #fff;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 19px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <label>С <input type="date"></label>
+  <br>
+  <br>
+  <label>По <input type="date"></label>
+  <br>
+  <br>
+  <button onclick="getResult()">получить сводку</button>
+
+
+  <div class="show">
+
+  </div>
+<script>
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+
+  function getResult() {
+    var show = document.querySelector('.show');
+
+    var date = document.querySelectorAll('input');
+
+    var z = moment(date[0].value).unix();
+    var x = moment(date[1].value).unix();
+
+    fetch(`http://176.57.78.17:8888/oilProducts/monthInfo?start=${z}&end=${x}`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        show.innerHTML = 'Пришло: ' + result.arriveVolume;
+        show.innerHTML += '<br> Ушло: ' + result.goneVolume;
+      })
+      .catch(error => console.log('error', error));
+
+
+  }
+
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.6/moment-timezone-with-data.min.js"></script>
+</body>
+</html>
