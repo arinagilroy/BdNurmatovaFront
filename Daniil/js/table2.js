@@ -16,10 +16,10 @@ function newTbodyTr(obj, index) {
 							инфо
 						</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="#"><strong>id:</strong> ${ obj.workshop.id }</a>
-							<a class="dropdown-item" href="#"><strong>address:</strong> ${ obj.workshop.name }</a>
-							<a class="dropdown-item" href="#"><strong>phone:</strong> ${ obj.workshop.numberOfEmployees }</a>
-							<a class="dropdown-item" href="#"><strong>bank account id:</strong> ${ obj.workshop.numberOfShiftsPerDay }</a>
+						<a class="dropdown-item" href="#"><strong>id:</strong> ${ obj.workshop.id }</a>
+						<a class="dropdown-item" href="#"><strong>name:</strong> ${ obj.workshop.name }</a>
+						<a class="dropdown-item" href="#"><strong>phone:</strong> ${ obj.workshop.numberOfEmployees }</a>
+						<a class="dropdown-item" href="#"><strong>number of shifts:</strong> ${ obj.workshop.numberOfShiftsPerDay }</a>
 						</div>
 					</div>
 				`;
